@@ -16,6 +16,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 
 import com.wangliangjun.androidtraining133.R;
+import com.wangliangjun.androidtraining133.utils.PreFUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -72,7 +73,14 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void drump() {
-        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        Intent intent;
+        boolean firstEnter = PreFUtils.getBoolean(SplashActivity.this, "firstEnter", true);
+        if (firstEnter){
+
+        }else{
+            intent = new Intent(SplashActivity.this, MainActivity.class);
+        }
+
         startActivity(intent);
         //结束延时
         timer.cancel();
