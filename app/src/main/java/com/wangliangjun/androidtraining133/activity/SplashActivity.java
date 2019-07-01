@@ -14,6 +14,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.wangliangjun.androidtraining133.R;
 import com.wangliangjun.androidtraining133.utils.PreFUtils;
@@ -25,12 +26,23 @@ public class SplashActivity extends BaseActivity {
 
     private Timer timer;
     private Button skipButton;
+    private ImageView icon;
+    ImageView splashImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         skipButton = findViewById(R.id.skipButton);
+        splashImageView = findViewById(R.id.splashImageView);
+        icon = findViewById(R.id.imageView);
+        int i = PreFUtils.getInt(SplashActivity.this, "splashImage", 0);
+        splashImageView.setImageResource(getImageId(i));
+        if (i!=0){
+            icon.setVisibility(View.VISIBLE);
+        }else{
+            icon.setVisibility(View.INVISIBLE);
+        }
         ConstraintLayout splashPager = findViewById(R.id.splashPager);
         //缩放动画
         ScaleAnimation scaleAnimation = new ScaleAnimation(0, 1, 0, 1
@@ -77,7 +89,6 @@ public class SplashActivity extends BaseActivity {
         boolean firstEnter = PreFUtils.getBoolean(SplashActivity.this, "firstEnter", true);
         if (firstEnter){
             intent = new Intent(SplashActivity.this, GuideActivity.class);
-//            PreFUtils.setBoolean(SplashActivity.this,"firstEnter",false);
         }else{
             intent = new Intent(SplashActivity.this, MainActivity.class);
         }
@@ -87,5 +98,9 @@ public class SplashActivity extends BaseActivity {
         timer.cancel();
         //结束当前页面，防止按返回键回到该页面
         finish();
+    }
+    private int getImageId(int i){
+        int[] imageId = {R.drawable.logo,R.drawable.logo1,R.drawable.logo2,R.drawable.logo3};
+        return imageId[i];
     }
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--这里是将两种圆点合成一个文件分，enable是当前页面则显示白圆-->
+    <item android:drawable="@drawable/indicator_yellow_dot" android:state_enabled="true"/>
+    <item android:drawable="@drawable/indicator_gray_dot" android:state_enabled="false"/>
+</selector>
