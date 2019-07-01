@@ -76,7 +76,8 @@ public class SplashActivity extends BaseActivity {
         Intent intent;
         boolean firstEnter = PreFUtils.getBoolean(SplashActivity.this, "firstEnter", true);
         if (firstEnter){
-
+            intent = new Intent(SplashActivity.this, GuideActivity.class);
+//            PreFUtils.setBoolean(SplashActivity.this,"firstEnter",false);
         }else{
             intent = new Intent(SplashActivity.this, MainActivity.class);
         }
@@ -84,6 +85,7 @@ public class SplashActivity extends BaseActivity {
         startActivity(intent);
         //结束延时
         timer.cancel();
+        //结束当前页面，防止按返回键回到该页面
         finish();
     }
 }
