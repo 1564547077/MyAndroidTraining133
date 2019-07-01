@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AndroidTraining133</string>
+    <string name="title_home">主页</string>
+    <string name="title_chart">统计</string>
+    <string name="title_video">视频</string>
+    <string name="title_person">个人</string>
+    <string name="title_activity_splash">SplashActivity</string>
+</resources>
