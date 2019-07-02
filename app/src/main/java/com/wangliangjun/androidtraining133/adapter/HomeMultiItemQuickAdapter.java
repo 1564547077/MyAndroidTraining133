@@ -1,5 +1,6 @@
 package com.wangliangjun.androidtraining133.adapter;
 
+import android.animation.Animator;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -10,9 +11,11 @@ import com.wangliangjun.androidtraining133.global.GlobalConstants;
 import com.wangliangjun.androidtraining133.utils.JsonParseUtils;
 import com.wangliangjun.androidtraining133.viewholder.HomeViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeMultiItemQuickAdapter extends BaseMultiItemQuickAdapter<NewsBean, HomeViewHolder> {
+    ArrayList<NewsBean> data;
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
@@ -21,6 +24,7 @@ public class HomeMultiItemQuickAdapter extends BaseMultiItemQuickAdapter<NewsBea
      */
     public HomeMultiItemQuickAdapter(List<NewsBean> data) {
         super(data);
+        this.data = (ArrayList<NewsBean>) data;
         //根据不同的新闻类型选择不同的布局
         addItemType(1, R.layout.item_news1);
         addItemType(2, R.layout.item_news2);
