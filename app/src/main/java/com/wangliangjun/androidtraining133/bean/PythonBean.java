@@ -2,7 +2,7 @@ package com.wangliangjun.androidtraining133.bean;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
-public class PythonList{
+public class PythonBean {
     /**
      * id : 1
      * address : 北京

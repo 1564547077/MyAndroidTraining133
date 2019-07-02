@@ -2,7 +2,7 @@ package com.wangliangjun.androidtraining133.bean;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
-public class ADList implements MultiItemEntity {
+public class ADBean implements MultiItemEntity {
     /**
      * id : 1
      * type : 3

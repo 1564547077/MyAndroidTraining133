@@ -4,7 +4,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 import java.util.List;
 
-public class VideoList {
+public class VideoBean {
     /**
      * id : 1
      * name : jQuery精品教程

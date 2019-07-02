@@ -2,7 +2,7 @@ package com.wangliangjun.androidtraining133.bean;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
-public class ChooseConstellationList{
+public class ChooseConstellationBean {
 
     /**
      * id : 1

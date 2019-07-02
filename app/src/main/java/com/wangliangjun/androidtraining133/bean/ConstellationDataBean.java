@@ -2,7 +2,7 @@ package com.wangliangjun.androidtraining133.bean;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
-public class ConstellationData implements MultiItemEntity {
+public class ConstellationDataBean implements MultiItemEntity {
     /**
      * id : 1
      * name : 白羊座
