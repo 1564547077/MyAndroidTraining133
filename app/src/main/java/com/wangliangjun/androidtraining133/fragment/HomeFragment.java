@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -61,6 +62,7 @@ public class HomeFragment extends BaseFragment {
         floatingRefreshButton = view.findViewById(R.id.floatingRefreshButton);
         refreshLayout = view.findViewById(R.id.refreshLayout);
         title.setText("新闻页");
+        newsList.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
         floatingRefreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
