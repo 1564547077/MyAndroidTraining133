@@ -3,7 +3,6 @@ package com.wangliangjun.androidtraining133.activity;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -12,7 +11,7 @@ import com.wangliangjun.androidtraining133.R;
 import com.wangliangjun.androidtraining133.adapter.AppViewPagerAdapter;
 import com.wangliangjun.androidtraining133.fragment.BaseFragment;
 import com.wangliangjun.androidtraining133.fragment.ChartFragment;
-import com.wangliangjun.androidtraining133.fragment.MainFragment;
+import com.wangliangjun.androidtraining133.fragment.HomeFragment;
 import com.wangliangjun.androidtraining133.fragment.PersonFragment;
 import com.wangliangjun.androidtraining133.fragment.VideoFragment;
 
@@ -53,7 +52,7 @@ public class MainActivity extends BaseActivity {
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         appViewPager = findViewById(R.id.AppViewPager);
-        pages.add(new MainFragment());
+        pages.add(new HomeFragment());
         pages.add(new ChartFragment());
         pages.add(new VideoFragment());
         pages.add(new PersonFragment());
