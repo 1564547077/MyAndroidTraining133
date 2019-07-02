@@ -32,11 +32,28 @@ public abstract class BaseFragment extends Fragment {
             ((TextView) view).setText(TAG);
 
         }else{
-            view = inflater.inflate(setLayoutResourceId(),container);
+            view = inflater.inflate(setLayoutResourceId(),container,false);
         }
         return view;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(view);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+    }
+
     protected int setLayoutResourceId(){
         return 0;
     }
+
+    protected abstract void initView(View view);
+
+    protected abstract void initData();
 }
