@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.gyf.immersionbar.ImmersionBar;
+import com.wangliangjun.androidtraining133.R;
 
 public abstract class BaseFragment extends Fragment {
     protected Activity mActivity;
@@ -20,6 +24,11 @@ public abstract class BaseFragment extends Fragment {
         super.onAttach(context);
         mActivity = getActivity();
         TAG = getClass().getSimpleName();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Nullable
@@ -34,9 +43,9 @@ public abstract class BaseFragment extends Fragment {
         }else{
             view = inflater.inflate(setLayoutResourceId(),container,false);
         }
+        ImmersionBar.with(this).init();
         return view;
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -56,4 +65,5 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void initView(View view);
 
     protected abstract void initData();
+
 }

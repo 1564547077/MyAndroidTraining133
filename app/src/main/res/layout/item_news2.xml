@@ -16,9 +16,9 @@
         android:maxLines="2"
         android:textStyle="bold"
         android:text="新闻标题"
-        android:textSize="17sp"
+        android:textSize="18sp"
         app:layout_constrainedWidth="true"
-
+        android:textColor="#000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
