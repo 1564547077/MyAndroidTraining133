@@ -3,10 +3,11 @@
     android:id="@+id/toolbar"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
+    android:layout_height="70dp"
     android:background="#fff"
     android:minHeight="?attr/actionBarSize"
-    android:theme="?attr/actionBarTheme">
+    android:theme="?attr/actionBarTheme"
+    android:paddingTop="25dp">
     <TextView
         android:id="@+id/toolbarTitle"
         android:layout_width="wrap_content"

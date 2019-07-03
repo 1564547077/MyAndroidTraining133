@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
     <item
-        android:id="@+id/change_user"
-        android:title="切换账号"
-        app:showAsAction="never" />
+        android:id="@+id/test_menu1"
+        app:showAsAction="never"
+        android:title="测试1" />
 </menu>

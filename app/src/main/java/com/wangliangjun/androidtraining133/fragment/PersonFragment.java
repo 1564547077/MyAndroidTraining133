@@ -1,8 +1,6 @@
 package com.wangliangjun.androidtraining133.fragment;
 
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 
 import com.wangliangjun.androidtraining133.R;
 

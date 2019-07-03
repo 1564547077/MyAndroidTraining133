@@ -5,8 +5,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wangliangjun.androidtraining133.R;
 import com.wangliangjun.androidtraining133.adapter.AppViewPagerAdapter;
@@ -22,6 +25,7 @@ public class MainActivity extends BaseActivity {
     private TextView mTextMessage;
     private ViewPager appViewPager;
     private TextView tile;
+    private Toolbar toolbar;
 
     private ArrayList<BaseFragment> pages = new ArrayList<>();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -55,12 +59,15 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         final BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
+        toolbar = findViewById(R.id.toolbar);
         tile = findViewById(R.id.toolbarTitle);//获取顶部标题
         tile.setText("新闻");
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         appViewPager = findViewById(R.id.AppViewPager);
+        //将主页面添加入集合中
         pages.add(new HomeFragment());
         pages.add(new ChartFragment());
         pages.add(new VideoFragment());
@@ -72,6 +79,7 @@ public class MainActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 navView.getMenu().getItem(position).setChecked(true);
+                //根据页面改变toolbar的标题
                 switch (position){
                     case 0:
                         tile.setText("新闻");
@@ -89,5 +97,4 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-
 }
