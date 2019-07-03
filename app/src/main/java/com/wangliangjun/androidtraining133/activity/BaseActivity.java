@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.Toast;
+
 import com.gyf.immersionbar.ImmersionBar;
 
 public abstract class BaseActivity extends AppCompatActivity {
