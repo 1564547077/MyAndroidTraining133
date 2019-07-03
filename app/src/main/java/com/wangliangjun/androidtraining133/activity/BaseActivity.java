@@ -20,7 +20,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         //隐藏顶部系统自带标题
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        ImmersionBar.with(this).statusBarAlpha(0.3f).init();
+        ImmersionBar.with(this).statusBarAlpha(0.2f).init();
         super.onCreate(savedInstanceState);
         TAG = getClass().getSimpleName();
     }
