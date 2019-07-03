@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -46,8 +47,10 @@ public class HomeFragment extends BaseFragment {
     static private Handler handler;
     private FloatingActionButton floatingRefreshButton;
     private final static int SUCCESS = 0x001;
+    private final static int FAILURE = 0x002;
     SmartRefreshLayout refreshLayout;
     private HomeMultiItemQuickAdapter homeMultiItemQuickAdapter;
+    private ArrayList<NewsBean> newsListData;
 
     @Override
     protected int setLayoutResourceId() {
@@ -56,13 +59,9 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-        toolbar = view.findViewById(R.id.toolbar);
-        title = view.findViewById(R.id.toolbarTitle);
         newsList = view.findViewById(R.id.newsList);
         floatingRefreshButton = view.findViewById(R.id.floatingRefreshButton);
         refreshLayout = view.findViewById(R.id.refreshLayout);
-        title.setText("新闻页");
-        newsList.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
         floatingRefreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,14 +71,14 @@ public class HomeFragment extends BaseFragment {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                initData();
+                initData(true);
             }
         });
     }
 
     @SuppressLint("HandlerLeak")
     @Override
-    protected void initData() {
+    protected void initData(final boolean refresh) {
         //使用okhttp获取服务器数据
         post(GlobalConstants.REQUEST_NEWS_URL);
         handler = new Handler() {
@@ -89,13 +88,22 @@ public class HomeFragment extends BaseFragment {
                 switch (msg.what){
                     case SUCCESS:
                         String json = (String) msg.obj;
-                        ArrayList<NewsBean> newsListData = (ArrayList<NewsBean>) JsonParseUtils.getNewsList(json);
+                        newsListData = (ArrayList<NewsBean>) JsonParseUtils.getNewsList(json);
                         homeMultiItemQuickAdapter = new HomeMultiItemQuickAdapter(newsListData);
                         homeMultiItemQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN  );
                         homeMultiItemQuickAdapter.isFirstOnly(false);
                         newsList.setAdapter(homeMultiItemQuickAdapter);
                         newsList.setLayoutManager(new LinearLayoutManager(getContext()));
-                        Toast.makeText(mActivity, "刷新成功", Toast.LENGTH_SHORT).show();
+                        if (refresh){
+                            Toasty.success(mActivity, "刷新成功!", Toast.LENGTH_SHORT, true).show();
+                        }
+                        break;
+                    case FAILURE:
+                        if (refresh){
+                            Toasty.error(mActivity,"刷新失败，请检查网络连接", Toast.LENGTH_SHORT, true).show();
+                        }else{
+                            Toasty.error(mActivity,"加载失败，请检查网络连接", Toast.LENGTH_SHORT, true).show();
+                        }
                         break;
                 }
             }
@@ -107,17 +115,18 @@ public class HomeFragment extends BaseFragment {
                 url).get().build();
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
+            Message message = new Message();
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 Log.d(TAG,"加载失败；"+e.getLocalizedMessage());
                 refreshLayout.finishRefresh(false);
+                message.what = FAILURE;
+                handler.sendMessage(message);
             }
-
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 String json = response.body().string();
                 Log.i(TAG, "onResponse: "+json);
-                Message message = new Message();
                 message.obj = json;
                 message.what = SUCCESS;
                 handler.sendMessage(message);

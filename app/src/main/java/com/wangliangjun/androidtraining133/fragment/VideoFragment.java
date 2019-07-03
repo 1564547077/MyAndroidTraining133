@@ -18,13 +18,10 @@ public class VideoFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-        toolbar = view.findViewById(R.id.toolbar);
-        title = toolbar.findViewById(R.id.toolbarTitle);
     }
 
 
     @Override
-    protected void initData() {
-        title.setText("视频页");
+    protected void initData(boolean refresh) {
     }
 }

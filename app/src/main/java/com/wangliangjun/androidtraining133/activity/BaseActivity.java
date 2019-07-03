@@ -7,6 +7,8 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.gyf.immersionbar.ImmersionBar;
+
 public abstract class BaseActivity extends AppCompatActivity {
     protected String TAG;
     private long exitTime;
@@ -15,6 +17,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         //隐藏顶部系统自带标题
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        ImmersionBar.with(this).init();
         super.onCreate(savedInstanceState);
         TAG = getClass().getSimpleName();
     }
@@ -36,5 +39,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -8,8 +8,6 @@ import com.wangliangjun.androidtraining133.R;
 
 public class ChartFragment extends BaseFragment {
 
-    private Toolbar toolbar;
-    private TextView title;
 
     @Override
     protected int setLayoutResourceId() {
@@ -18,13 +16,10 @@ public class ChartFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-        toolbar = view.findViewById(R.id.toolbar);
-        title = toolbar.findViewById(R.id.toolbarTitle);
     }
 
 
     @Override
-    protected void initData() {
-        title.setText("图表页");
+    protected void initData(boolean refresh) {
     }
 }

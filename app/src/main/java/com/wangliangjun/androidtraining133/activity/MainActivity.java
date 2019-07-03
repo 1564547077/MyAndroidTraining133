@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 public class MainActivity extends BaseActivity {
     private TextView mTextMessage;
     private ViewPager appViewPager;
+    private TextView tile;
+
     private ArrayList<BaseFragment> pages = new ArrayList<>();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -29,15 +32,19 @@ public class MainActivity extends BaseActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     appViewPager.setCurrentItem(0);
+                    tile.setText("新闻");
                     return true;
                 case R.id.navigation_chart:
                     appViewPager.setCurrentItem(1);
+                    tile.setText("统计");
                     return true;
                 case R.id.navigation_video:
                     appViewPager.setCurrentItem(2);
+                    tile.setText("视频");
                     return true;
                 case R.id.navigation_person:
                     appViewPager.setCurrentItem(3);
+                    tile.setText("个人");
                     return true;
             }
             return false;
@@ -50,6 +57,8 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         final BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
+        tile = findViewById(R.id.toolbarTitle);//获取顶部标题
+        tile.setText("新闻");
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         appViewPager = findViewById(R.id.AppViewPager);
         pages.add(new HomeFragment());
@@ -63,6 +72,20 @@ public class MainActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 navView.getMenu().getItem(position).setChecked(true);
+                switch (position){
+                    case 0:
+                        tile.setText("新闻");
+                        break;
+                    case 1:
+                        tile.setText("统计");
+                        break;
+                    case 2:
+                        tile.setText("视频");
+                        break;
+                    case 3:
+                        tile.setText("个人");
+                        break;
+                }
             }
         });
     }

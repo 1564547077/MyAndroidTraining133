@@ -18,13 +18,10 @@ public class PersonFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-        toolbar = view.findViewById(R.id.toolbar);
-        title = toolbar.findViewById(R.id.toolbarTitle);
     }
 
 
     @Override
-    protected void initData() {
-        title.setText("个人页");
+    protected void initData(boolean refresh) {
     }
 }
