@@ -33,6 +33,7 @@ public class MainActivity extends BaseActivity {
     private ViewPager appViewPager;
     private TextView title;
     private Toolbar toolbar;
+    private Button style;
 
     private ArrayList<BaseFragment> pages = new ArrayList<>();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -44,18 +45,22 @@ public class MainActivity extends BaseActivity {
                 case R.id.navigation_home:
                     appViewPager.setCurrentItem(0);
                     title.setText("首页");
+                    style.setVisibility(View.VISIBLE);
                     return true;
                 case R.id.navigation_chart:
                     appViewPager.setCurrentItem(1);
                     title.setText("统计");
+                    style.setVisibility(View.INVISIBLE);
                     return true;
                 case R.id.navigation_video:
                     appViewPager.setCurrentItem(2);
                     title.setText("视频");
+                    style.setVisibility(View.INVISIBLE);
                     return true;
                 case R.id.navigation_person:
                     appViewPager.setCurrentItem(3);
                     title.setText("个人");
+                    style.setVisibility(View.INVISIBLE);
                     return true;
             }
             return false;
@@ -71,6 +76,8 @@ public class MainActivity extends BaseActivity {
         mTextMessage = findViewById(R.id.message);
         toolbar = findViewById(R.id.appToolbar);
         title = findViewById(R.id.toolbarTitle);//获取顶部标题
+        style = findViewById(R.id.style);
+        style.setVisibility(View.VISIBLE);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         initToolbarStyle();
         initViewPager();
@@ -84,21 +91,24 @@ public class MainActivity extends BaseActivity {
                 switch (position){
                     case 0:
                         title.setText("首页");
+                        style.setVisibility(View.VISIBLE);
                         break;
                     case 1:
                         title.setText("统计");
+                        style.setVisibility(View.INVISIBLE);
                         break;
                     case 2:
                         title.setText("视频");
+                        style.setVisibility(View.INVISIBLE);
                         break;
                     case 3:
                         title.setText("个人");
+                        style.setVisibility(View.INVISIBLE);
                         break;
                 }
             }
         });
-        Button button = findViewById(R.id.test);
-        button.setOnClickListener(new View.OnClickListener() {
+        style.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(MainActivity.this)
@@ -109,7 +119,6 @@ public class MainActivity extends BaseActivity {
                         .itemsCallback(new MaterialDialog.ListCallback() {
                             @Override
                             public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                                Toast.makeText(MainActivity.this, which+"", Toast.LENGTH_SHORT).show();
                                 switch (which){
                                     case 0:
                                         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -136,7 +145,6 @@ public class MainActivity extends BaseActivity {
                                         setTitleWhite();
                                         PreFUtils.setInt(MainActivity.this,"toolbarColor",Color.parseColor("#000000"));
                                         break;
-
                                 }
                             }
                         })

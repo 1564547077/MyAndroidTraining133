@@ -12,7 +12,6 @@ import com.gyf.immersionbar.ImmersionBar;
 public abstract class BaseActivity extends AppCompatActivity {
     protected String TAG;
     private long exitTime;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         //隐藏顶部系统自带标题
