@@ -8,8 +8,6 @@ import com.wangliangjun.androidtraining133.R;
 
 public class VideoFragment extends BaseFragment {
 
-    private Toolbar toolbar;
-    private TextView title;
 
     @Override
     protected int setLayoutResourceId() {

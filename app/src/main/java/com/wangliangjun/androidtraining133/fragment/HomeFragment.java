@@ -41,8 +41,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class HomeFragment extends BaseFragment {
-    private Toolbar toolbar;
-    private TextView title;
     private RecyclerView newsList;
     static private Handler handler;
     private FloatingActionButton floatingRefreshButton;

@@ -8,9 +8,6 @@ import com.wangliangjun.androidtraining133.R;
 
 public class PersonFragment extends BaseFragment {
 
-    private Toolbar toolbar;
-    private TextView title;
-
     @Override
     protected int setLayoutResourceId() {
         return R.layout.person_layout;
