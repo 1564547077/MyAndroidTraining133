@@ -18,6 +18,6 @@ public class ChartFragment extends BaseFragment {
 
 
     @Override
-    protected void initData(boolean refresh) {
+    protected void initData() {
     }
 }

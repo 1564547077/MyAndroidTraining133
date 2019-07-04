@@ -29,13 +29,13 @@ import com.wangliangjun.androidtraining133.utils.PreFUtils;
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
-    private TextView mTextMessage;
     private ViewPager appViewPager;
     private TextView title;
     private Toolbar toolbar;
     private Button style;
 
     private ArrayList<BaseFragment> pages = new ArrayList<>();
+    //底部导航栏点击切换页面
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -73,7 +73,6 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         final BottomNavigationView navView = findViewById(R.id.nav_view);
-        mTextMessage = findViewById(R.id.message);
         toolbar = findViewById(R.id.appToolbar);
         title = findViewById(R.id.toolbarTitle);//获取顶部标题
         style = findViewById(R.id.style);
@@ -108,11 +107,12 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+        //首页右上角导航栏颜色设置
         style.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(MainActivity.this)
-                        .title("更改状态栏颜色")
+                        .title("更改导航栏颜色")
                         .titleGravity(GravityEnum.CENTER)
                         .items("白色","绿色","红色","蓝色","黑色")
                         .itemsGravity(GravityEnum.CENTER)

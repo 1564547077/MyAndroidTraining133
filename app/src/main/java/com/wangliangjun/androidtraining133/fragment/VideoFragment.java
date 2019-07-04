@@ -20,6 +20,6 @@ public class VideoFragment extends BaseFragment {
 
 
     @Override
-    protected void initData(boolean refresh) {
+    protected void initData() {
     }
 }

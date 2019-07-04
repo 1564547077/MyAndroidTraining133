@@ -17,6 +17,6 @@ public class PersonFragment extends BaseFragment {
 
 
     @Override
-    protected void initData(boolean refresh) {
+    protected void initData() {
     }
 }

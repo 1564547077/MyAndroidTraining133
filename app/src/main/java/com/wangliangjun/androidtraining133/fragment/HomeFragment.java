@@ -1,54 +1,49 @@
 package com.wangliangjun.androidtraining133.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wangliangjun.androidtraining133.R;
+import com.wangliangjun.androidtraining133.activity.NewsDetailActivity;
 import com.wangliangjun.androidtraining133.adapter.HomeMultiItemQuickAdapter;
+import com.wangliangjun.androidtraining133.bean.ADBean;
 import com.wangliangjun.androidtraining133.bean.NewsBean;
 import com.wangliangjun.androidtraining133.global.GlobalConstants;
+import com.wangliangjun.androidtraining133.utils.ImageUtil;
 import com.wangliangjun.androidtraining133.utils.JsonParseUtils;
-
-import org.jetbrains.annotations.NotNull;
+import com.wangliangjun.androidtraining133.utils.NetUtil;
+import com.youth.banner.Banner;
+import com.youth.banner.loader.ImageLoader;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class HomeFragment extends BaseFragment {
     private RecyclerView newsList;
-    static private Handler handler;
     private FloatingActionButton floatingRefreshButton;
-    private final static int SUCCESS = 0x001;
-    private final static int FAILURE = 0x002;
     SmartRefreshLayout refreshLayout;
     private HomeMultiItemQuickAdapter homeMultiItemQuickAdapter;
-    private ArrayList<NewsBean> newsListData;
+    private ArrayList<NewsBean> newsListData = null;
+    private ArrayList<ADBean> ADData;
 
     @Override
     protected int setLayoutResourceId() {
@@ -69,66 +64,118 @@ public class HomeFragment extends BaseFragment {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                initData(true);
+                initData();
+            }
+        });
+        homeMultiItemQuickAdapter = new HomeMultiItemQuickAdapter(null);
+        View headView = LayoutInflater.from(mActivity).inflate(R.layout.home_head,null);
+        homeMultiItemQuickAdapter.addHeaderView(headView);//添加头布局
+
+        final Banner banner = headView.findViewById(R.id.banner);
+        banner.setImageLoader(new ImageLoader() {
+            @Override
+            public void displayImage(Context context, Object path, ImageView imageView) {
+                if(path instanceof String){
+                    ImageUtil.setImage(context,(String)path,imageView);
+                }
+                if (path instanceof Integer){
+                    imageView.setImageResource((Integer) path);
+                }
+            }
+        });
+        ArrayList<Integer> imageViews = new ArrayList<>();
+        for (int i = 0; i <3; i++) {
+            imageViews.add(R.drawable.pic_item_list_default);
+        }
+        //设置图片集合
+        banner.setImages(imageViews);
+        //banner设置方法全部调用完毕时最后调用
+        banner.start();
+
+        View empty = LayoutInflater.from(mActivity).inflate(R.layout.empty_home,null);
+        homeMultiItemQuickAdapter.setEmptyView(empty);
+        homeMultiItemQuickAdapter.setHeaderAndEmpty(true);//显示空布局的同时会显示头布局
+        newsList.setAdapter(homeMultiItemQuickAdapter);
+        newsList.setLayoutManager(new LinearLayoutManager(mActivity));
+        homeMultiItemQuickAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(mActivity,NewsDetailActivity.class);
+                intent.putExtra("url",newsListData.get(position).getNewsUrl());
+                startActivity(intent);
             }
         });
     }
 
     @SuppressLint("HandlerLeak")
     @Override
-    protected void initData(final boolean refresh) {
-        //使用okhttp获取服务器数据
-        post(GlobalConstants.REQUEST_NEWS_URL);
-        handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                switch (msg.what){
-                    case SUCCESS:
-                        String json = (String) msg.obj;
-                        newsListData = (ArrayList<NewsBean>) JsonParseUtils.getNewsList(json);
-                        homeMultiItemQuickAdapter = new HomeMultiItemQuickAdapter(newsListData);
-                        homeMultiItemQuickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN  );
-                        homeMultiItemQuickAdapter.isFirstOnly(false);
-                        newsList.setAdapter(homeMultiItemQuickAdapter);
-                        newsList.setLayoutManager(new LinearLayoutManager(getContext()));
-                        if (refresh){
-                            Toasty.success(mActivity, "刷新成功!", Toast.LENGTH_SHORT, true).show();
-                        }
-                        break;
-                    case FAILURE:
-                        if (refresh){
-                            Toasty.error(mActivity,"刷新失败，请检查网络连接", Toast.LENGTH_SHORT, true).show();
-                        }else{
-                            Toasty.error(mActivity,"加载失败，请检查网络连接", Toast.LENGTH_SHORT, true).show();
-                        }
-                        break;
-                }
-            }
-        };
+    protected void initData() {
+        getNewsData();
+        getADData();
     }
-    void post(String url){
-        OkHttpClient client = new OkHttpClient().newBuilder().build();
-        Request request = new Request.Builder().url(
-                url).get().build();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            Message message = new Message();
+
+
+    void getNewsData(){
+        NetUtil.getData(GlobalConstants.REQUEST_NEWS_URL, new NetUtil.MyCallBack() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+            public void onFailure(IOException e) {
                 Log.d(TAG,"加载失败；"+e.getLocalizedMessage());
                 refreshLayout.finishRefresh(false);
-                message.what = FAILURE;
-                handler.sendMessage(message);
             }
+
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                String json = response.body().string();
+            public void onResponse(final String json) {
                 Log.i(TAG, "onResponse: "+json);
-                message.obj = json;
-                message.what = SUCCESS;
-                handler.sendMessage(message);
                 refreshLayout.finishRefresh(true);
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasty.success(mActivity, "刷新成功", Toast.LENGTH_SHORT, true).show();
+                        newsListData = (ArrayList<NewsBean>) JsonParseUtils.getList(NewsBean.class,json);
+                        homeMultiItemQuickAdapter.setNewData(newsListData);
+                    }
+                });
+            }
+        });
+    }
+    void getADData(){
+        NetUtil.getData(GlobalConstants.REQUEST_AD_URL, new NetUtil.MyCallBack() {
+            @Override
+            public void onFailure(IOException e) {
+                Log.d(TAG,"加载失败；"+e.getLocalizedMessage());
+                refreshLayout.finishRefresh(false);
+            }
+
+            @Override
+            public void onResponse(final String json) {
+                Log.i(TAG, "onResponse: "+json);
+                refreshLayout.finishRefresh(false);
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ADData = (ArrayList<ADBean>) JsonParseUtils.getList(ADBean.class,json);
+                        final Banner banner = homeMultiItemQuickAdapter.getHeaderLayout().findViewById(R.id.banner);
+                        banner.setImageLoader(new ImageLoader() {
+                            @Override
+                            public void displayImage(Context context, Object path, ImageView imageView) {
+                                if(path instanceof String){
+                                    ImageUtil.setImage(context,(String)path,imageView);
+                                }
+                                if (path instanceof Integer){
+                                    imageView.setImageResource((Integer) path);
+                                }
+                            }
+                        });
+                        ArrayList<String> imageViews = new ArrayList<>();
+                        for (int i = 0; i <3; i++) {
+                            imageViews.add(GlobalConstants.SERVER_URL+ADData.get(i).getImg1());
+                        }
+                        //设置图片集合
+                        banner.setImages(imageViews);
+                        //banner设置方法全部调用完毕时最后调用
+                        banner.start();
+                    }
+                });
             }
         });
     }

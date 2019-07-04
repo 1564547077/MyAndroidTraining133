@@ -50,7 +50,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData(false);
+        initData();
     }
 
     protected int setLayoutResourceId(){
@@ -59,6 +59,6 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void initView(View view);
 
-    protected abstract void initData(boolean refresh);
+    protected abstract void initData();
 
 }

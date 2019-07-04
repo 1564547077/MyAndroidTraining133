@@ -20,6 +20,7 @@
         android:layout_gravity="center"
         android:textSize="19sp"
         android:textColor="#000"
+        android:maxLines="1"
         android:text="标题"/>
     <Button
         android:id="@+id/style"
