@@ -54,7 +54,7 @@
         android:layout_height="26dp"
         android:layout_gravity="right"
         android:visibility="invisible"
-        android:background="@drawable/ic_palette_white_24dp"/>
+        android:background="@drawable/ic_palette_black_24dp"/>
     <Button
         android:id="@+id/textSize"
         android:layout_width="26dp"

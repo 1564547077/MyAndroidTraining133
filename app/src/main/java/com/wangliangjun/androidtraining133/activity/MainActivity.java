@@ -123,27 +123,32 @@ public class MainActivity extends BaseActivity {
                                     case 0:
                                         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
                                         title.setTextColor(Color.parseColor("#000000"));
+                                        style.setBackground(getResources().getDrawable(R.drawable.ic_palette_black_24dp));
                                         PreFUtils.setInt(MainActivity.this,"toolbarColor",Color.parseColor("#FFFFFF"));
                                         break;
                                     case 1:
                                         toolbar.setBackgroundColor(Color.parseColor("#008577"));
                                         setTitleWhite();
                                         PreFUtils.setInt(MainActivity.this,"toolbarColor",Color.parseColor("#008577"));
+                                        style.setBackground(getResources().getDrawable(R.drawable.ic_palette_white_24dp));
                                         break;
                                     case 2:
                                         toolbar.setBackgroundColor(Color.parseColor("#F00000"));
                                         setTitleWhite();
                                         PreFUtils.setInt(MainActivity.this,"toolbarColor",Color.parseColor("#F00000"));
+                                        style.setBackground(getResources().getDrawable(R.drawable.ic_palette_white_24dp));
                                         break;
                                     case 3:
                                         toolbar.setBackgroundColor(Color.parseColor("#0C63CD"));
                                         setTitleWhite();
                                         PreFUtils.setInt(MainActivity.this,"toolbarColor",Color.parseColor("#0C63CD"));
+                                        style.setBackground(getResources().getDrawable(R.drawable.ic_palette_white_24dp));
                                         break;
                                     case 4:
                                         toolbar.setBackgroundColor(Color.parseColor("#000000"));
                                         setTitleWhite();
                                         PreFUtils.setInt(MainActivity.this,"toolbarColor",Color.parseColor("#000000"));
+                                        style.setBackground(getResources().getDrawable(R.drawable.ic_palette_white_24dp));
                                         break;
                                 }
                             }

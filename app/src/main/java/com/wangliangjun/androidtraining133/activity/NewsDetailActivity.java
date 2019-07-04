@@ -56,7 +56,7 @@ public class NewsDetailActivity extends HomeAsUpBaseActivity {
         toolbarTitle.setTextSize(17);
         toolbar.setBackgroundColor(Color.parseColor("#000000"));
         toolbarTitle.setTextColor(Color.parseColor("#FFFFFF"));
-        //添加第三方AgentWeb到本Activity的布局中(官方方法)
+        //添加第三方AgentWeb到本Activity的布局中
         mAgentWeb = AgentWeb.with(this)
                 .setAgentWebParent(newDetailLinearLayout,
                         new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -66,19 +66,6 @@ public class NewsDetailActivity extends HomeAsUpBaseActivity {
                 .setMainFrameErrorView(R.layout.agentweb_error_page, -1)
                 .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.DERECT)
                 .interceptUnkownUrl()
-                .setWebLayout(new IWebLayout() {
-                    @NonNull
-                    @Override
-                    public ViewGroup getLayout() {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public WebView getWebView() {
-                        return null;
-                    }
-                })
                 .setWebChromeClient(new WebChromeClient(){
                     @Override
                     public void onReceivedTitle(WebView view, String title) {
