@@ -1,97 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <com.youth.banner.Banner
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="150dp" />
+    android:paddingBottom="10dp"
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:paddingTop="20dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
+
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:banner_default_image="@drawable/pic_item_list_default"
+            app:delay_time="4000" />
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingTop="20dp">
 
-            <ImageView
-                android:id="@+id/subjectImage1"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:srcCompat="@drawable/python_icon" />
-
-            <TextView
-                android:id="@+id/subjectText1"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/python" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/subjectImage2"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:srcCompat="@drawable/java_icon" />
+                <ImageView
+                    android:id="@+id/subjectImage1"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:srcCompat="@drawable/python_icon" />
 
-            <TextView
-                android:id="@+id/subjectText2"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/subjectText1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/python" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/java" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/subjectImage3"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:srcCompat="@drawable/php_icon" />
+                <ImageView
+                    android:id="@+id/subjectImage2"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:srcCompat="@drawable/java_icon" />
 
-            <TextView
-                android:id="@+id/subjectText3"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/subjectText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/java" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/php" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/subjectImage4"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:srcCompat="@drawable/android_icon" />
+                <ImageView
+                    android:id="@+id/subjectImage3"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:srcCompat="@drawable/php_icon" />
 
-            <TextView
-                android:id="@+id/subjectText4"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/subjectText3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/php" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/android" />
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/subjectImage4"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:srcCompat="@drawable/android_icon" />
+
+                <TextView
+                    android:id="@+id/subjectText4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/android" />
+            </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
-</LinearLayout>
+
+</android.support.v7.widget.CardView>
