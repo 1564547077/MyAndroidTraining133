@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
@@ -23,7 +22,6 @@ import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.DefaultWebClient;
-import com.just.agentweb.IWebLayout;
 import com.just.agentweb.WebChromeClient;
 import com.just.agentweb.WebCreator;
 import com.wangliangjun.androidtraining133.R;
@@ -39,7 +37,7 @@ public class NewsDetailActivity extends HomeAsUpBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_newsdetail);
+        setContentView(R.layout.activity_news_detail);
         newDetailLinearLayout = findViewById(R.id.newDetailLinearLayout);
         Button backButton = findViewById(R.id.backButton);
         Button closeButton = findViewById(R.id.closeButton);

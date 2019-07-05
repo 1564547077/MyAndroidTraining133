@@ -9,4 +9,5 @@
     <string name="java">Java学科</string>
     <string name="php">PHP学科</string>
     <string name="android">Android学科</string>
+    <string name="title_activity_python">PythonActivity</string>
 </resources>

@@ -44,4 +44,5 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.youth.banner:banner:1.4.10'
     implementation 'com.just.agentweb:agentweb:4.0.3-beta' // (必选)
+    implementation 'com.nightonke:boommenu:2.1.1'
 }
